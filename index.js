@@ -1,5 +1,5 @@
 import express from "express";
-import recipeRouter from "./routes/recipe.js";
+import recipeRouter from "./routes/recipe-routes.js";
 import mongoose from "mongoose";
 
 // Connect to database
