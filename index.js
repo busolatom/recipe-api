@@ -1,5 +1,6 @@
 import express from "express";
 import recipeRouter from "./routes/recipe-routes.js";
+import categoryRouter from "./routes/category-routes.js";
 import mongoose from "mongoose";
 
 // Connect to database
@@ -13,13 +14,12 @@ recipeapp.use(express.json());
 
 // Use routes- enable us make use of other routes defined in other files
 recipeapp.use(recipeRouter);
+recipeapp.use(categoryRouter);
 
 // Listen for incoming requests
-recipeapp.listen(3000, () => {
-    console.log('App listening on port 3000');
+const port = process.env.PORT || 3000;
+recipeapp.listen(port, () => {
+    console.log(`App listening on port ${port}`);
 });
 
-
-// user password
-//  0oyaUgeseJzdWcXg
 

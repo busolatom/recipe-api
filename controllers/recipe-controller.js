@@ -47,3 +47,5 @@ export const deleteRecipe = async (req, res, next) => {
 export const getRecipe = (req, res) => {
     res.json(`Recipe with id ${req.params.id} provided`);
 }
+
+// Assignment- Create an endpoint to patch favourite field and flip it to true or false
