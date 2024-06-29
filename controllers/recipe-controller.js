@@ -49,3 +49,15 @@ export const getRecipe = (req, res) => {
 }
 
 // Assignment- Create an endpoint to patch favourite field and flip it to true or false
+// Update favourite
+export const updateFavourite = async (req, res, next) => {
+  try {
+    // update favourite by id
+    const newFavourite = req.body.favourite;
+    const updatedFavourite = await RecipeModel.findByIdAndUpdate(req.params.id, {favourite: newFavourite}, {new: true});
+    // Return response
+    res.status(200).json(updatedFavourite);
+  } catch (error) {
+    next(error);
+  }
+}
