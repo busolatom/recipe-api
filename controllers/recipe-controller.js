@@ -27,9 +27,18 @@ export const getRecipes = async (req, res, next) => {
   }
 
 //   Update recipe
-export const updateRecipe = (req, res) => {
-    res.json(`Recipe with id ${req.params.id} updated`);
+export const updateRecipe = async (req, res, next) => {
+  try {
+    // do an update
+    const newUpdate = req.body;
+    const updatedRecipe = await RecipeModel.findByIdAndUpdate(req.params.id, newUpdate, {new: true});
+    // Return response
+    res.status(200).json(updatedRecipe);
+  } catch (error) {
+    next(error);
+  }
 }
+
 
 // Delete recipe
 export const deleteRecipe = async (req, res, next) => {
@@ -48,16 +57,4 @@ export const getRecipe = (req, res) => {
     res.json(`Recipe with id ${req.params.id} provided`);
 }
 
-// Assignment- Create an endpoint to patch favourite field and flip it to true or false
-// Update favourite
-export const updateFavourite = async (req, res, next) => {
-  try {
-    // update favourite by id
-    const newFavourite = req.body.favourite;
-    const updatedFavourite = await RecipeModel.findByIdAndUpdate(req.params.id, {favourite: newFavourite}, {new: true});
-    // Return response
-    res.status(200).json(updatedFavourite);
-  } catch (error) {
-    next(error);
-  }
-}
+
