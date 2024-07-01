@@ -37,7 +37,7 @@ export const updateRecipe = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+}  
 
 
 // Delete recipe

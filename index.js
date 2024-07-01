@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 
 // Connect to database
 await mongoose.connect(process.env.Mongo_url);
+console.log ("Database connected");
 
 // Create Express App
 const recipeapp = express();
