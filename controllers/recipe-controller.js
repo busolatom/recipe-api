@@ -13,6 +13,17 @@ export const getRecipes = async (req, res, next) => {
     }
  }
 
+//  Get recipe by Id
+export const getRecipe = async (req, res, next) => {
+  try {
+   const oneRecipe = await RecipeModel.findById(req.params.id);
+  //  return response
+   res.status(200).json(oneRecipe);
+  } catch (error) {
+       next(error);
+  }
+}
+
 //  Post recipe
  export const postRecipe = async (req, res, next) => {
     try {
@@ -52,9 +63,6 @@ export const deleteRecipe = async (req, res, next) => {
    }
 }
 
-// Get recipe by Id
-export const getRecipe = (req, res) => {
-    res.json(`Recipe with id ${req.params.id} provided`);
-}
+
 
 
