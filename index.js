@@ -17,8 +17,10 @@ expressOasGenerator.handleResponses(recipeapp, {
     mongooseModels: mongoose.modelNames(),
 });
 
-// Apply middlewares-application middleware unwraps data posted from the frontend
+// Apply middlewares-application middleware express.json() unwraps data posted from the frontend
 recipeapp.use(express.json());
+// Helps generate url to access static images hosted locally in your api, name in quote is your image file folder name
+recipeapp.use(express.static('uploads'));
 
 // Use routes- enable us make use of other routes defined in other files
 recipeapp.use(recipeRouter);

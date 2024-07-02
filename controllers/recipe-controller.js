@@ -3,6 +3,8 @@ import { RecipeModel } from "../models/recipe-model.js";
 // Get all recipes
 export const getRecipes = async (req, res, next) => {
     try {
+      // Get query params- the structuring
+      const {limit, skip, search} = req.query;
       // Get all recipes from database
       const allRecipes = await RecipeModel.find();
       // Return all recipes as response
@@ -28,7 +30,10 @@ export const getRecipe = async (req, res, next) => {
  export const postRecipe = async (req, res, next) => {
     try {
         // Add recipe to database
-        await RecipeModel.create(req.body);
+        await RecipeModel.create({
+          ...req.body,
+          image: req.file.filename 
+      });
         // Return response
         // res.json('Fufu and Light Soup Recipe added');
         res.json(`${req.body.name} recipe added`);
