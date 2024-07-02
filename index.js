@@ -12,6 +12,7 @@ console.log ("Database connected");
 // Create Express App
 const recipeapp = express();
 expressOasGenerator.handleResponses(recipeapp, {
+    alwaysServeDocs: true,
     tags: ['categories', 'recipes'],
     mongooseModels: mongoose.modelNames(),
 });

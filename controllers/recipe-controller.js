@@ -38,7 +38,8 @@ export const getRecipe = async (req, res, next) => {
   }
 
 //   Update recipe
-export const updateRecipe = async (req, res, next) => {
+export const updateRecipe = async (req, res, next) => 
+  {    
   try {
     // do an update
     const newUpdate = req.body;
