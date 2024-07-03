@@ -18,7 +18,8 @@ expressOasGenerator.handleResponses(recipeapp, {
 });
 
 // Apply middlewares-application middleware express.json() unwraps data posted from the frontend
-recipeapp.use(cors());
+// cors middleware to allow frontend access to use the api 
+recipeapp.use(cors()); 
 recipeapp.use(express.json());
 // Helps generate url to access static images hosted locally in your api, name in quote is your image file folder name
 recipeapp.use(express.static('uploads'));
