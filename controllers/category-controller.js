@@ -8,7 +8,7 @@ export const getCategories = async (req, res, next) => {
             filter = "{}", 
             sort = "{}",
             fields = "{}", 
-            limit = 10, 
+            limit = 0, 
             skip = 0
         } = req.query;
         // Get all categories from database
@@ -29,6 +29,8 @@ export const postCategory = async (req, res, next) => {
     try {
         // Add category to database
         const newCategory = await CategoryModel.create({
+
+            
             ...req.body,
             image: req.file.filename
         });

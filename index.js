@@ -2,8 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
 import expressOasGenerator from "express-oas-generator";
+import session from "express-session";
 import recipeRouter from "./routes/recipe-routes.js";
 import categoryRouter from "./routes/category-routes.js";
+import userRouter from "./routes/user.js";
 
 // Connect to database
 await mongoose.connect(process.env.Mongo_url);
@@ -23,10 +25,17 @@ recipeapp.use(cors());
 recipeapp.use(express.json());
 // Helps generate url to access static images hosted locally in your api, name in quote is your image file folder name
 recipeapp.use(express.static('uploads'));
+recipeapp.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+})); 
 
 // Use routes- enable us make use of other routes defined in other files
-recipeapp.use(recipeRouter);
+recipeapp.use(userRouter);
 recipeapp.use(categoryRouter);
+recipeapp.use(recipeRouter);
 expressOasGenerator.handleRequests();
 recipeapp.use((req, res) => res.redirect('/api-docs/'));
 
