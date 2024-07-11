@@ -3,12 +3,13 @@ import mongoose from "mongoose";
 import cors from 'cors';
 import expressOasGenerator from "express-oas-generator";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import recipeRouter from "./routes/recipe-routes.js";
 import categoryRouter from "./routes/category-routes.js";
 import userRouter from "./routes/user.js";
 
 // Connect to database
-await mongoose.connect(process.env.Mongo_url);
+await mongoose.connect(process.env.MONGO_URL);
 console.log ("Database connected");
 
 // Create Express App
@@ -29,7 +30,11 @@ recipeapp.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    // cookie: { secure: true }
+    // Store session
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URL
+    })
 })); 
 
 // Use routes- enable us make use of other routes defined in other files
